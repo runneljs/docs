@@ -1,0 +1,23 @@
+{
+  "name": "runnel-docs",
+  "version": "0.1.0",
+  "description": "Documentation for Runnel",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "prettier": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/runneljs/docs.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/runneljs/docs/issues"
+  },
+  "homepage": "https://github.com/runneljs/docs#readme",
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
+}
