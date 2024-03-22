@@ -28,7 +28,7 @@ interface Validator {
 
 You can use the package [@runnel/validator](https://www.npmjs.com/package/@runnel/validator) for this purpose.
 
-Please read [Make Your Own Validator](/libraries/make-your-own/#validator) if you need a customized validator.
+Please read [Make Your Own Validator](../libraries/make-your-own.md#validator) if you need a customized validator.
 
 ## Installation
 

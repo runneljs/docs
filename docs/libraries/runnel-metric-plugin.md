@@ -25,7 +25,7 @@ const [metrics, setMetrics] = useState();
 subscribe(setMetrics);
 ```
 
-Find more usage example on the [Guides](/guides) page.
+Find more usage example on the [Guides](../guides.md) page.
 
 ## Output Examples
 
