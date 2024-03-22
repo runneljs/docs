@@ -5,6 +5,7 @@ repo_name: runneljs/runnel
 repo_url: https://github.com/runneljs/runnel
 theme:
   name: material
+  custom_dir: overrides
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
