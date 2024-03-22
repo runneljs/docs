@@ -54,8 +54,6 @@ nav:
 plugins:
   - search
   - social
-  - minify:
-      minify_html: true
 markdown_extensions:
   - footnotes
   - codehilite
