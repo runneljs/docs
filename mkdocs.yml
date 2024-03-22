@@ -42,7 +42,7 @@ theme:
   language: en
 copyright: Copyright &copy; 2024 - Present Wataru Oguchi
 nav:
-  - Runnel: index.md
+  - index.md
   - Getting Started:
       - getting-started/installation.md
       - getting-started/example-react.md
@@ -52,6 +52,7 @@ nav:
     - libraries/runnel-validator.md
     - libraries/runnel-metric-plugin.md
     - libraries/make-your-own.md
+  - Demo: demo.md
 plugins:
   - search
   - social
