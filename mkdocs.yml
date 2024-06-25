@@ -3,6 +3,7 @@ site_description: >-
   The Solution to Micro Frontend Communication
 repo_name: runneljs/runnel
 repo_url: https://github.com/runneljs/runnel
+site_url: https://docs.runnel.run/
 theme:
   name: material
   custom_dir: overrides
