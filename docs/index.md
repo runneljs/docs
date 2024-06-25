@@ -4,6 +4,14 @@ An Event Bus library designed for Micro-Frontend Applications.
 
 > Hugely Inspired by [@trutoo/event-bus](https://www.npmjs.com/package/@trutoo/event-bus)
 
+## Install
+
+```sh
+npm install runneljs
+```
+
+<https://www.npmjs.com/package/runneljs>
+
 ## Communication Challenges in Micro-Frontends
 
 In microservice and micro-frontend development, the concept of "autonomy" is pivotal. Each micro-frontend, or fragment, is developed and deployed independently. However, these autonomous fragments must still communicate with one another. The Publish/Subscribe (PubSub) pattern is a popular method for facilitating this communication while maintaining decoupling.

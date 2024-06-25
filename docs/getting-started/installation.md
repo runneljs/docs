@@ -1,5 +1,13 @@
 # Installation & Basic Usage
 
+## Installation
+
+Below is an installation example using [deep-equal](https://www.npmjs.com/package/deep-equal).
+
+```sh
+npm install runneljs @runnel/validator deep-equal
+```
+
 ## Preparation
 
 `runnel` requires **two dependencies** to be installed.
@@ -29,14 +37,6 @@ interface Validator {
 You can use the package [@runnel/validator](https://www.npmjs.com/package/@runnel/validator) for this purpose.
 
 Please read [Make Your Own Validator](../libraries/make-your-own.md#validator) if you need a customized validator.
-
-## Installation
-
-Below is an installation example using [deep-equal](https://www.npmjs.com/package/deep-equal).
-
-```sh
-npm install runneljs @runnel/validator deep-equal
-```
 
 ## Usage
 
