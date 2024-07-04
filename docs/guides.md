@@ -26,13 +26,13 @@ import deepEqual from "deep-equal";
 import { createEventBus } from "runneljs";
 
 export function setupReporter() {
-  const { plugin, observer } = createPlugin(deepEqual); // Creates a plugin and an observer
+  const { register, observer } = createPlugin(deepEqual); // Creates a plugin and an observer
   // Instantiate another event bus.
   const { registerTopic } = createEventBus({
     deepEqual,
     payloadValidator: validator,
-    pluginMap: new Map([[window, [plugin]]]), // The key `window` indicates that the plugin should be applied globally. Requires js-dom or happy-dom for tests.
   });
+  register();
   return { observer }; // Expose the observer
 }
 ```
@@ -78,9 +78,8 @@ describe("App", () => {
       count: { // "count" topic
         onCreateSubscribe: 1, // One "subscribe" action in the code
         onCreatePublish: 1, // One "publish" action in the code
-        schema: { type: "number" }, // Registered schema
-        subscribe: [1], // Payloads received by subscribers
-        publish: [1] // Payloads published
+        subscribe: 1, // Payloads received by subscribers
+        publish: 1 // Payloads published
       },
     });
   });

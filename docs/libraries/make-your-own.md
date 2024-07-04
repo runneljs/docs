@@ -25,20 +25,15 @@ You can create your own validator using [@cfworker/json-schema](https://github.c
 
 ## Plugin
 
-Creating a plugin is straightforward. Here's an example for encrypting string payloads.
+Runnel dispatches CustomEvents to the `window` object. You can create your own plugin to observe these events.
 
-```ts
-import { decrypt, encrypt } from "your-favorite-encryption-library";
+### Custom Events
 
-const secretKey = "my-secret-key";
-export const plugin = {
-  publish: (_topicId: string, payload: any) => {
-    return typeof payload === "string" ? encrypt(payload, secretKey) : payload;
-  },
-  subscribe: (_topicId: string, payload: any) => {
-    return typeof payload === "string" ? decrypt(payload, secretKey) : payload;
-  },
-};
-```
-
-**Note:** The `publish` and `subscribe` run on every pub/sub event, potentially impacting performance.
+| Event Name                     | Triggered when...              |
+| ------------------------------ | ------------------------------ |
+| `runnel:onpublish`             | A topic is published.          |
+| `runnel:onpublishcreated`      | A topic publisher is created.  |
+| `runnel:onsubscribe`           | A topic is subscribed to.      |
+| `runnel:onsubscribecreated`    | A topic subscriber is created. |
+| `runnel:onunsubscribe`         | A topic is unsubscribed from.  |
+| `runnel:onunregisteralltopics` | All topics are unregistered.   |

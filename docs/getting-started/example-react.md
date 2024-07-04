@@ -22,12 +22,11 @@ export { registerTopic };
 import { useEffect, useState } from "react";
 import { registerTopic } from "./path-to/event-bus";
 
-const countTopic = registerTopic<number>("count", {
-  type: "number",
-});
-
 export default function App() {
   const [count, setCount] = useState(0);
+  const countTopic = registerTopic<number>("count", {
+    type: "number",
+  });
   useEffect(() => {
     const unsubscribe = countTopic.subscribe(setCount);
     return () => unsubscribe();

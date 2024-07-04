@@ -2,27 +2,29 @@
 
 To verify publisher/subscriber calls, use [@runnel/metric-plugin](https://www.npmjs.com/package/@runnel/metric-plugin) which collects five types of data:
 
-1. `onCreatePublish` - Number of `topic.publish()` executions.
-1. `onCreateSubscribe` - Number of `topic.subscribe()` declarations.
-1. `schema` - The topic's schema. Object.
-1. `publish` - Array of published payloads.
-1. `subscribe` - Array of payloads received by subscribers. In cases of multiple subscribers, a payload is counted per subscriber.
+1. `onPublishCreated` - Number of `topic.publish()` executions.
+1. `onSubscribeCreated` - Number of `topic.subscribe()` declarations.
+1. `onPublish` - The latest payload to the topic.
+1. `onSubscribe` - The latest payload from the topic.
 
 ## Usage
 
 ```ts
-const { plugin, subscribe } = createPlugin(deepEqual);
+import {createPlugin, type Metrics} from "@runnel/metric-plugin";
+import {createEventBus} from "runneljs";
+
+const { register, observer } = createPlugin(deepEqual);
 const eventBus = createEventBus({
   deepEqual,
   payloadValidator,
-  pluginMap: new Map([[window, [metricPlugin]]]), // To observe the window. If the `scope` is smaller than the specified plugin scope, the specified plugin will not function.
 });
+register();
 
 ...
 
 // Example with React.useState
 const [metrics, setMetrics] = useState();
-subscribe(setMetrics);
+observer.subscribe(setMetrics);
 ```
 
 Find more usage example on the [Guides](../guides.md) page.
@@ -38,11 +40,10 @@ Find more usage example on the [Guides](../guides.md) page.
 ```json
 {
   "topic1": {
-    "onCreatePublish": 1,
-    "publish": [100],
-    "onCreateSubscribe": 0,
-    "subscribe": [],
-    "schema": { "type": "number" }
+    "onPublishCreated": 1,
+    "onPublish": 100,
+    "onSubscribeCreated": 0,
+    "onSubscribe": null
   }
 }
 ```
@@ -56,11 +57,10 @@ Find more usage example on the [Guides](../guides.md) page.
 ```json
 {
   "topic2": {
-    "onCreatePublish": 0,
-    "publish": [],
-    "onCreateSubscribe": 1,
-    "subscribe": [],
-    "schema": { "type": "string" }
+    "onPublishCreated": 0,
+    "onPublish": null,
+    "onSubscribeCreated": 1,
+    "onSubscribe": null
   }
 }
 ```
