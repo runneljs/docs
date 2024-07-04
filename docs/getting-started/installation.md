@@ -43,8 +43,8 @@ Please read [Make Your Own Validator](../libraries/make-your-own.md#validator) i
 1. Initialize an event bus with `createEventBus` which returns `registerTopic`.
 
 ```ts
-import deepEqual from "deep-equal";
 import { createEventBus } from "runneljs";
+import deepEqual from "deep-equal";
 import { validator } from "@runnel/validator";
 
 const { registerTopic } = createEventBus({
@@ -56,7 +56,7 @@ const { registerTopic } = createEventBus({
 2. Create an event topic.
 
 ```ts
-const exampleTopic = registerTopic<string>("message", {
+const exampleTopic = registerTopic<string>("messageTopic", {
   type: "string",
 });
 ```
@@ -69,4 +69,41 @@ exampleTopic.publish("Hello World");
 
 ```ts
 exampleTopic.subscribe((payload: string) => alert(`Received [${payload}]`));
+```
+
+## Usage: BroadcastChannel API
+
+1. Initialize the BroadcastChannel API.
+
+```ts
+import { runnel } from "runneljs/bc";
+import deepEqual from "deep-equal";
+import { validator } from "@runnel/validator";
+
+const bc = runnel(new BroadcastChannel("my-event-bus"), deepEqual, validator);
+```
+
+2. Register the event handler.
+
+```ts
+bc.addEventListener(
+  "message",
+  function (event: MessageEvent) {
+    alert(`Received [${event.data}]`);
+  },
+  "messageTopic",
+  { type: "string" },
+);
+```
+
+3. Publish the event.
+
+```ts
+bc.postMessage("Hello World", "messageTopic", { type: "string" });
+// Or,
+bc.onmessage(
+  new MessageEvent("message", { data: "Hello World" }),
+  "messageTopic",
+  { type: "string" },
+);
 ```
