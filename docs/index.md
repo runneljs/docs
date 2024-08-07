@@ -1,6 +1,6 @@
 # RunnelJS
 
-A type-safe Event Bus library designed for Micro-Frontend Applications. It supports [`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel) optionally.
+A type-safe Event Bus library designed for Micro-Frontend Applications powered by the [`BroadcastChannel API`](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel).
 
 > Hugely Inspired by [@trutoo/event-bus](https://www.npmjs.com/package/@trutoo/event-bus)
 
