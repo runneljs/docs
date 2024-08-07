@@ -25,15 +25,13 @@ You can create your own validator using [@cfworker/json-schema](https://github.c
 
 ## Plugin
 
-Runnel dispatches CustomEvents to the `window` object. You can create your own plugin to observe these events.
+Runnel dispatches CustomEvents to the `window.top` or `window` object. You can create your own plugin to observe these events.
 
 ### Custom Events
 
-| Event Name                     | Triggered when...              |
-| ------------------------------ | ------------------------------ |
-| `runnel:onpublish`             | A topic is published.          |
-| `runnel:onpublishcreated`      | A topic publisher is created.  |
-| `runnel:onsubscribe`           | A topic is subscribed to.      |
-| `runnel:onsubscribecreated`    | A topic subscriber is created. |
-| `runnel:onunsubscribe`         | A topic is unsubscribed from.  |
-| `runnel:onunregisteralltopics` | All topics are unregistered.   |
+| Event Name                        | Triggered when...             |
+| --------------------------------- | ----------------------------- |
+| `runnel:on-create-topic`          | A topic is created.           |
+| `runnel:on-post-message`          | A topic is published.         |
+| `runnel:on-add-event-listener`    | A topic is subscribed to.     |
+| `runnel:on-remove-event-listener` | A topic is unsubscribed from. |

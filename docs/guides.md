@@ -23,17 +23,14 @@ This involves creating a separate event bus that interacts with the main event b
 import { createPlugin } from "@runnel/metric-plugin"; // The new dependency
 import { validator } from "@runnel/validator";
 import deepEqual from "deep-equal";
-import { createEventBus } from "runneljs";
+import { runnel } from "runneljs";
 
 export function setupReporter() {
   const { register, observer } = createPlugin(deepEqual); // Creates a plugin and an observer
   // Instantiate another event bus.
-  const { registerTopic } = createEventBus({
-    deepEqual,
-    payloadValidator: validator,
-  });
+  const { registerTopic } = runnel("my-event-bus", deepEqual, validator);
   register();
-  return { observer }; // Expose the observer
+  return { registerTopic, observer }; // Expose the observer
 }
 ```
 
@@ -76,10 +73,12 @@ describe("App", () => {
   test("verifies expected publish/subscribe events", () => {
     expect(report).toEqual({
       count: { // "count" topic
-        onCreateSubscribe: 1, // One "subscribe" action in the code
-        onCreatePublish: 1, // One "publish" action in the code
-        subscribe: 1, // Payloads received by subscribers
-        publish: 1 // Payloads published
+        schema: { type: "number" },
+        onCreateTopic: 1,
+        lastPayload: 1,
+        onPostMessage: 1, // One "publish" action in the code
+        onAddEventListener: 1, // One "subscribe" action in the code
+        onRemoveEventListener: 0
       },
     });
   });

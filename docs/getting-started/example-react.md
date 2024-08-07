@@ -6,13 +6,11 @@ When you have two micro-frontend applications each contain the following files, 
 
 ```ts
 import deepEqual from "deep-equal";
-import { createEventBus } from "runneljs";
+import { runnel } from "runneljs";
 import { validator } from "@runnel/validator";
 
-const { registerTopic } = createEventBus({
-  deepEqual,
-  payloadValidator: validator,
-});
+// Singleton
+const { registerTopic } = runnel("my-event-bus", deepEqual, validator);
 export { registerTopic };
 ```
 

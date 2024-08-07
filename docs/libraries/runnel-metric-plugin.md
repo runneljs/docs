@@ -1,29 +1,28 @@
 # @runnel/metric-plugin
 
-To verify publisher/subscriber calls, use [@runnel/metric-plugin](https://www.npmjs.com/package/@runnel/metric-plugin) which collects five types of data:
+To verify publisher/subscriber calls, use [@runnel/metric-plugin](https://www.npmjs.com/package/@runnel/metric-plugin) which collects six types of data:
 
-1. `onPublishCreated` - Number of `topic.publish()` executions.
-1. `onSubscribeCreated` - Number of `topic.subscribe()` declarations.
-1. `onPublish` - The latest payload to the topic.
-1. `onSubscribe` - The latest payload from the topic.
+1. `schema` - The schema of the topic.
+2. `onCreateTopic`: The number of the topic created.
+3. `lastPayload`: The latest payload to the topic.
+4. `onPostMessage`: The number of the topic published.
+5. `onAddEventListener`: The number of the topic subscribed to.
+6. `onRemoveEventListener`: The number of the topic unsubscribed from.
 
 ## Usage
 
 ```ts
-import {createPlugin, type Metrics} from "@runnel/metric-plugin";
-import {createEventBus} from "runneljs";
+import { createPlugin, type Metrics } from "@runnel/metric-plugin";
+import { runnel } from "runneljs";
 
 const { register, observer } = createPlugin(deepEqual);
-const eventBus = createEventBus({
-  deepEqual,
-  payloadValidator,
-});
+const eventBus = runnel("my-event-bus", deepEqual, validator);
 register();
 
 ...
 
 // Example with React.useState
-const [metrics, setMetrics] = useState();
+const [metrics, setMetrics] = useState<Metrics>();
 observer.subscribe(setMetrics);
 ```
 
@@ -40,10 +39,12 @@ Find more usage example on the [Guides](../guides.md) page.
 ```json
 {
   "topic1": {
-    "onPublishCreated": 1,
-    "onPublish": 100,
-    "onSubscribeCreated": 0,
-    "onSubscribe": null
+    "schema": { "type": "number" },
+    "onCreateTopic": 1,
+    "lastPayload": 100,
+    "onPostMessage": 1,
+    "onAddEventListener": 0,
+    "onRemoveEventListener": 0
   }
 }
 ```
@@ -57,10 +58,12 @@ Find more usage example on the [Guides](../guides.md) page.
 ```json
 {
   "topic2": {
-    "onPublishCreated": 0,
-    "onPublish": null,
-    "onSubscribeCreated": 1,
-    "onSubscribe": null
+    "schema": { "type": "string" },
+    "onCreateTopic": 1,
+    "lastPayload": null,
+    "onPostMessage": 0,
+    "onAddEventListener": 1,
+    "onRemoveEventListener": 0
   }
 }
 ```
